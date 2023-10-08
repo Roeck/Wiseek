@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
+import { DataTable } from "./_components/data-table";
+
 const CoursesPage = async () => {
   const { userId } = auth();
 
@@ -8,7 +10,11 @@ const CoursesPage = async () => {
     return redirect("/");
   }
 
-  return <div className="p-6">Datatable</div>;
+  return (
+    <div className="p-6">
+      <DataTable />
+    </div>
+  );
 };
 
 export default CoursesPage;
