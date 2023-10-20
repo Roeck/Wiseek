@@ -19,6 +19,7 @@ model Course {
   isPublished Boolean @default(false)
 
   categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
 
   attachments Attachment[]
 
@@ -27,6 +28,11 @@ model Course {
 
   @@index([categoryId])
   @@fulltext([title])
+}
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+  courses Course[]
 }
 
 model Attachment {
