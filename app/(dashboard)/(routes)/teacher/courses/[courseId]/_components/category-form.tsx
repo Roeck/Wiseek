@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Combobox } from "@/components/ui/combobox";
 
 interface CategoryFormProps {
   initialData: Course;
@@ -101,7 +102,9 @@ export const CategoryForm = ({
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl>ComboBox</FormControl>
+                  <FormControl>
+                    <Combobox options={...options} {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
