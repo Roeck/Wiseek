@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Editor } from "@/components/editor";
 import { Preview } from "@/components/preview";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ChapterAccessFormProps {
   initialData: Chapter;
@@ -107,7 +108,12 @@ export const ChapterAccessForm = ({
               name="isFree"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                  <FormControl>Checkbox</FormControl>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormDescription>
                       Check this box if you want to make this chapter free for
