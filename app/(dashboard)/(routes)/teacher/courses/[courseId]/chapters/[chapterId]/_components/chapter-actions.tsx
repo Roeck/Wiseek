@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 interface ChapterActionsProps {
   disabled: boolean;
@@ -74,7 +75,11 @@ export const ChapterActions = ({
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
-      ConfirmModal
+      <ConfirmModal onConfirm={onDelete}>
+        <Button size="sm" disabled={isLoading}>
+          <Trash className="h-4 w-4" />
+        </Button>
+      </ConfirmModal>
     </div>
   );
 };
