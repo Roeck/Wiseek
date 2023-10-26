@@ -78,7 +78,14 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
         ))}
       {isEditing && (
         <div>
-          <FileUpload />
+          <FileUpload
+            endpoint="courseImage"
+            onChange={(url) => {
+              if (url) {
+                onSubmit({ imageUrl: url });
+              }
+            }}
+          />
           <div className="text-xs text-muted-foreground mt-4">
             16:9 aspect ratio recommended
           </div>
