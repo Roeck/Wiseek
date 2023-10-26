@@ -8,6 +8,7 @@ import { IconBadge } from "@/components/icon-badge";
 import { Banner } from "@/components/banner";
 
 import { ChapterActions } from "./_components/chapter-actions";
+import { ChapterTitleForm } from "./_components/chapter-title-form";
 
 const ChapterIdPage = async ({
   params,
@@ -84,7 +85,12 @@ const ChapterIdPage = async ({
                 <IconBadge icon={LayoutDashboard} />
                 <h2 className="text-xl">Customize your chapter</h2>
               </div>
-              ChapterTitleForm ChapterDescriptionForm
+              <ChapterTitleForm
+                initialData={chapter}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              />{" "}
+              ChapterDescriptionForm
             </div>
             <div>
               <div className="flex items-center gap-x-2">
