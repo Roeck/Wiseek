@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Preview } from "@/components/preview";
 
 interface ChapterDescriptionFormProps {
   initialData: Chapter;
@@ -79,7 +80,19 @@ export const ChapterDescriptionForm = ({
           )}
         </Button>
       </div>
-      Preview
+      {!isEditing && (
+        <div
+          className={cn(
+            "text-sm mt-2",
+            !initialData.description && "text-slate-500 italic"
+          )}
+        >
+          {!initialData.description && "No description"}
+          {initialData.description && (
+            <Preview value={initialData.description} />
+          )}
+        </div>
+      )}
       {isEditing && (
         <Form {...form}>
           <form
