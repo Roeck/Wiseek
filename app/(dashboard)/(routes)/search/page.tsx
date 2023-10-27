@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { SearchInput } from "@/components/search-input";
+import { getCourses } from "@/actions/get-courses";
 
 interface SearchPageProps {
   searchParams: {
@@ -24,14 +25,19 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     },
   });
 
+  const courses = await getCourses({
+    userId,
+    ...searchParams,
+  });
+
   return (
     <>
       <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <SearchInput />
       </div>
       <div className="p-6 space-y-4">
-        <h1>Categories</h1>
-        <h1>CourseList</h1>
+        <h2>Categories</h2>
+        <h2>SearchList</h2>
       </div>
     </>
   );
