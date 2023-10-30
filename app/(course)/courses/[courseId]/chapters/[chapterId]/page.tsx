@@ -4,6 +4,8 @@ import { File } from "lucide-react";
 
 import { getChapter } from "@/actions/get-chapter";
 
+import { Separator } from "@/components/ui/separator";
+
 import { Preview } from "@/components/preview";
 import { Banner } from "@/components/banner";
 import { VideoPlayer } from "./_components/video-player";
@@ -75,9 +77,26 @@ const ChapterIdPage = async ({
               />
             )}
           </div>
-          Separator
+          <Separator />
           <div>Preview</div>
-          <File />
+          {!!attachments.length && (
+            <>
+              <Separator />
+              <div className="p-4">
+                {attachments.map((attachment) => (
+                  <a
+                    href={attachment.url}
+                    target="_blank"
+                    key={attachment.id}
+                    className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline"
+                  >
+                    <File />
+                    <p className="line-clamp-1">{attachment.name}</p>
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
