@@ -8,6 +8,7 @@ import { Preview } from "@/components/preview";
 import { Banner } from "@/components/banner";
 import { VideoPlayer } from "./_components/video-player";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { CourseEnrollButton } from "./_components/course-enroll-button";
 
 const ChapterIdPage = async ({
   params,
@@ -60,13 +61,19 @@ const ChapterIdPage = async ({
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">Chapter title</h2>
-            <CourseProgressButton
-              chapterId={params.chapterId}
-              courseId={params.courseId}
-              nextChapterId={nextChapter?.id}
-              isCompleted={!!userProgress?.isCompleted}
-            />{" "}
-            CourseEnrollButton
+            {purchase ? (
+              <CourseProgressButton
+                chapterId={params.chapterId}
+                courseId={params.courseId}
+                nextChapterId={nextChapter?.id}
+                isCompleted={!!userProgress?.isCompleted}
+              />
+            ) : (
+              <CourseEnrollButton
+                courseId={params.courseId}
+                price={course.price!}
+              />
+            )}
           </div>
           Separator
           <div>Preview</div>
