@@ -3,6 +3,8 @@ import { Chapter, Course, UserProgress } from "@prisma/client";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+import { CourseSidebar } from "./course-sidebar";
+
 interface CourseMobileSidebarProps {
   course: Course & {
     chapters: (Chapter & {
@@ -22,7 +24,7 @@ export const CourseMobileSidebar = ({
         <Menu />
       </SheetTrigger>
       <SheetContent side="left" className="p-0 bg-white w-72">
-        CourseSidebar
+        <CourseSidebar course={course} progressCount={progressCount} />
       </SheetContent>
     </Sheet>
   );
