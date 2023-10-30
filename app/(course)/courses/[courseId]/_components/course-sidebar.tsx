@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { CourseProgress } from "@/components/course-progress";
 
+import { CourseSidebarItem } from "./course-sidebar-item";
+
 interface CourseSidebarProps {
   course: Course & {
     chapters: (Chapter & {
@@ -43,7 +45,18 @@ export const CourseSidebar = async ({
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full">CourseSidebarItem</div>
+      <div className="flex flex-col w-full">
+        {course.chapters.map((chapter) => (
+          <CourseSidebarItem
+            key={chapter.id}
+            id={chapter.id}
+            label={chapter.title}
+            isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
+            courseId={course.id}
+            isLocked={!chapter.isFree && !purchase}
+          />
+        ))}
+      </div>
     </div>
   );
 };
