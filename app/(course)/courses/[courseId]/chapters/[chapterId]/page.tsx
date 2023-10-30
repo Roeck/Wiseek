@@ -3,14 +3,13 @@ import { redirect } from "next/navigation";
 import { File } from "lucide-react";
 
 import { getChapter } from "@/actions/get-chapter";
-
-import { Separator } from "@/components/ui/separator";
-
-import { Preview } from "@/components/preview";
 import { Banner } from "@/components/banner";
+import { Separator } from "@/components/ui/separator";
+import { Preview } from "@/components/preview";
+
 import { VideoPlayer } from "./_components/video-player";
-import { CourseProgressButton } from "./_components/course-progress-button";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
+import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = async ({
   params,
@@ -46,10 +45,17 @@ const ChapterIdPage = async ({
 
   return (
     <div>
-      <Banner variant="success" label="You already completed this chapter." />
+      {userProgress?.isCompleted && (
+        <Banner variant="success" label="You already completed this chapter." />
+      )}
+      {isLocked && (
+        <Banner
+          variant="warning"
+          label="You need to purchase this course to watch this chapter."
+        />
+      )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
-          {" "}
           <VideoPlayer
             chapterId={params.chapterId}
             title={chapter.title}
@@ -62,7 +68,7 @@ const ChapterIdPage = async ({
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-2">Chapter title</h2>
+            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
             {purchase ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
@@ -78,7 +84,9 @@ const ChapterIdPage = async ({
             )}
           </div>
           <Separator />
-          <div>Preview</div>
+          <div>
+            <Preview value={chapter.description!} />
+          </div>
           {!!attachments.length && (
             <>
               <Separator />
