@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { File } from "lucide-react";
 
+import { getChapter } from "@/actions/get-chapter";
+
 import { Preview } from "@/components/preview";
 import { Banner } from "@/components/banner";
 import { VideoPlayer } from "./_components/video-player";
