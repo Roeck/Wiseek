@@ -7,6 +7,7 @@ import { getChapter } from "@/actions/get-chapter";
 import { Preview } from "@/components/preview";
 import { Banner } from "@/components/banner";
 import { VideoPlayer } from "./_components/video-player";
+import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = async ({
   params,
@@ -59,7 +60,13 @@ const ChapterIdPage = async ({
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">Chapter title</h2>
-            CourseProgressButton CourseEnrollButton
+            <CourseProgressButton
+              chapterId={params.chapterId}
+              courseId={params.courseId}
+              nextChapterId={nextChapter?.id}
+              isCompleted={!!userProgress?.isCompleted}
+            />{" "}
+            CourseEnrollButton
           </div>
           Separator
           <div>Preview</div>
