@@ -4,6 +4,8 @@
 
 <h2>Teaching and learning online SaaS platform. Features include creating a profile as a teacher role for creating and editing courses, and student role for buying, watching through course chapters and downloading completion certificates.</h2>
 
+## [Live Demo](https://wiseek.vercel.app)
+
 ![Screenshot (190)](https://github.com/Roeck/Wiseek/assets/28878478/d3d88355-8fc6-4d41-ad71-3667761a0e23)
 
 ![Screenshot (193)](https://github.com/Roeck/Wiseek/assets/28878478/51a08313-8a22-432c-9dbf-161bbf661d0d)
