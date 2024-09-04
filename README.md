@@ -39,7 +39,7 @@
 :zap: Zustand
 :zap: Node.js
 :zap: Prisma
-:zap: MySQL
+:zap: PostgreSQL
 :zap: Stripe
 :zap: Radix-UI :zap:
 
@@ -63,7 +63,7 @@
 - [x] Rich text editor for chapter description
 - [x] Authentication using Clerk
 - [x] ORM using Prisma
-- [x] MySQL database using Planetscale
+- [x] PostgreSQL database using NeonDB
 - [x] Fully responsive design
 
 ##
