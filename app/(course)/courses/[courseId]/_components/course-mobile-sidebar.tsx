@@ -1,13 +1,11 @@
-import { auth } from "@clerk/nextjs";
+import { Menu } from "lucide-react";
 import { Chapter, Course, UserProgress } from "@prisma/client";
-import { redirect } from "next/navigation";
 
-import { db } from "@/lib/db";
-import { CourseProgress } from "@/components/course-progress";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import { CourseSidebarItem } from "./course-sidebar-item";
+import { CourseSidebar } from "./course-sidebar";
 
-interface CourseSidebarProps {
+interface CourseMobileSidebarProps {
   course: Course & {
     chapters: (Chapter & {
       userProgress: UserProgress[] | null;
@@ -16,47 +14,18 @@ interface CourseSidebarProps {
   progressCount: number;
 }
 
-export const CourseSidebar = async ({
+export const CourseMobileSidebar = ({
   course,
   progressCount,
-}: CourseSidebarProps) => {
-  const { userId } = auth();
-
-  if (!userId) {
-    return redirect("/");
-  }
-
-  const purchase = await db.purchase.findUnique({
-    where: {
-      userId_courseId: {
-        userId,
-        courseId: course.id,
-      },
-    },
-  });
-
+}: CourseMobileSidebarProps) => {
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
-      <div className="p-8 flex flex-col border-b">
-        <h1 className="font-semibold">{course.title}</h1>
-        {purchase && (
-          <div className="mt-10">
-            <CourseProgress variant="success" value={progressCount} />
-          </div>
-        )}
-      </div>
-      <div className="flex flex-col w-full">
-        {course.chapters.map((chapter) => (
-          <CourseSidebarItem
-            key={chapter.id}
-            id={chapter.id}
-            label={chapter.title}
-            isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-            courseId={course.id}
-            isLocked={!chapter.isFree && !purchase}
-          />
-        ))}
-      </div>
-    </div>
+    <Sheet>
+      <SheetTrigger className="md:hidden pr-4 hover:opacity-75 transition">
+        <Menu />
+      </SheetTrigger>
+      <SheetContent side="left" className="p-0 bg-white w-72">
+        <CourseSidebar course={course} progressCount={progressCount} />
+      </SheetContent>
+    </Sheet>
   );
 };
